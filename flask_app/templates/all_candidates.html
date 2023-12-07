@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome Anis</h1>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    <fieldset>
+        <table>
+            <tr>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>Region</th>
+                <th>Action</th>
+            </tr>
+            {%for candidate in all_candidates%}
+                <tr>
+                    <td>{{candidate.first_name}}</td>
+                    <td>{{candidate.last_name}}</td>
+                    <td>{{candidate.region}}</td>
+                    <td><a href="/show/candidate/{{candidate.id}}">Show</a>
+                        <a href="/edit/candidate/{{candidate.id}}">Edit</a>
+                        <a href="/ban/candidate/{{candidate.id}}">Ban</a></td>
+                </tr>
+            {%endfor%}
+        </table>  
+    </fieldset>
+    
+</body>
+</html>

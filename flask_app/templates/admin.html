@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="">
+    <h1>WebsiteName</h1>
+    {%if session['role']=="admin"%}
+        <form action="/login" method="post">
+            <h2>Login</h2>
+            {% for message in get_flashed_messages()%}
+                <li class="h6 text-danger">{{message}}</li>
+            {%endfor%}
+            <label for="Email">Email</label>
+            <input type="text" name="email">
+            <label for="Password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Login</button>
+        </form>
+    {%elif session['role']=="voter"%}
+        <form action="/login/voter" method="post">
+            <h2>Login</h2>
+            {% for message in get_flashed_messages()%}
+                <li class="h6 text-danger">{{message}}</li>
+            {%endfor%}
+            <label for="Email">Email</label>
+            <input type="text" name="email">
+            <label for="Password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Login</button>
+        </form>
+    {%else%}
+        <form action="/login/candidate" method="post">
+            <h2>Login</h2>
+            {% for message in get_flashed_messages()%}
+                <li class="h6 text-danger">{{message}}</li>
+            {%endfor%}
+            <label for="Email">Email</label>
+            <input type="text" name="email">
+            <label for="Password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Login</button>
+        </form>
+    {%endif%}
+</body>
+</html>
