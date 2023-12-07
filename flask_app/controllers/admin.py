@@ -68,27 +68,38 @@ def show_create():
     return render_template('create_voter.html')
 
 #this route to make the admin to create the voter
-@app.route('/admin/create',methods=['POST'])
+@app.route('/admin/create/voter',methods=['POST'])
 def create():
     data={
         **request.form
     }
-    role=request.form['role']
-    if role=="voter":
-        if Voter.validate(data):
-            pw_hash=bcrypt.generate_password_hash(request.form['password'])
-            data={**request.form,'password':pw_hash}
-            voter_id=Voter.create(data)
-            session['voter_id']=voter_id
-            return redirect('/admin/dashboard/voters')
-    elif role=="candidate":
-        if Candidate.validate(data):
-            pw_hash=bcrypt.generate_password_hash(request.form['password'])
-            data={**request.form,'password':pw_hash}
-            candidate_id=Candidate.create(data)
-            session['candidate_id']=candidate_id
-            return redirect('/admin/dashboard/candidate')
+    if Voter.validate(data):
+        pw_hash=bcrypt.generate_password_hash(request.form['password'])
+        data={**request.form,'password':pw_hash}
+        voter_id=Voter.create(data)
+        session['voter_id']=voter_id
+        return redirect('/admin/dashboard/voters')
     return redirect('/admin/created')
+
+# to check the information that the candidat has entered
+@app.route('/admin/create/candidates',methods=['POST'])
+def create_cand():
+    data={
+        **request.form
+    }
+    if Candidate.validate(data):
+        pw_hash=bcrypt.generate_password_hash(request.form['password'])
+        data={**request.form,'password':pw_hash}
+        cand_id=Candidate.create(data)
+        session['cand_id']=cand_id
+        return redirect('/candidates')
+    return redirect('/admin/created')
+
+@app.route('/candidates')
+def show_candidates():
+    all_candidates=Candidate.get_all()
+    return render_template('all_candidates.html',all_candidates=all_candidates)
+
 
 @app.route('/admin/dashboard/voters')
 def show_voters():
@@ -111,14 +122,14 @@ def login_voter():
 #this route to render me the create pages for the candidate
 @app.route('/admin/candidate')
 def create_candidate():
-    session['role']="candidate"
-    return render_template('create_voter.html',session=session)
+    return render_template('create_candidates.html',session=session)
 
+#
 @app.route('/voter/dashboard')
 def show_candidat_voters():
-    return render_template('dashboard_candidates.html')
+    return render_template('dashboard_voters.html')
 
-
+# to get back to the old one
 @app.route('/back' , methods=['POST'])
 def back():
     session.clear()

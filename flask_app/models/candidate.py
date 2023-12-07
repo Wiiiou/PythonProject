@@ -37,6 +37,7 @@ class Candidate:
         if db_result:
             return cls(db_result[0])
         return None
+    
     @staticmethod
     def validate(data):
         is_valid=True

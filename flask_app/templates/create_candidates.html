@@ -11,12 +11,11 @@
         {% for message in get_flashed_messages()%}
             <li class="h6 text-danger">{{message}}</li>
         {%endfor%}
-        <form action="/admin/create/voter" method="post">
+        <form action="/admin/create/candidates" method="post">
             <input type="text" name="first_name" placeholder="First Name">
             <input type="text" name="last_name" placeholder="Last Name">
             <input type="email" name="email" placeholder="Email">
-            <input type="number" name="cin" placeholder="ID Number">
-            <select name="region" id="city">
+            <select name="region" id="">
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
                 <option value="Arizona">Arizona</option>
@@ -68,19 +67,10 @@
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
             </select>
-            <label for="">Role</label>
-            <select name="role" >
-                <option value="candidate">Candidate</option>
-                <option value="voter">Voter</option>
-            </select>
             <label for="Birt">Birthdate</label>
             <input type="date" name="birthdate">
             <input type="password" name="password" placeholder="Password">
-            {%if session['role']=="candidate"%}
-                <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
-            {%elif session['role']=="voter"%}
-                <p></p>
-            {%endif%}
+            <textarea name="bio" id="" cols="30" rows="10"></textarea>
             <button type="submit">Register</button>
         </form>
         <form action="/back" method="post">
