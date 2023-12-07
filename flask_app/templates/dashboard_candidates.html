@@ -6,6 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>dashboard candidates</h1>
+    <fieldset style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>website Name</h1>
+        <form action="/logout">
+            <button type="submit">Logout</button>
+        </form>
+    </fieldset>
+    <fieldset style="display: flex; justify-content: end; gap: 15px;">
+        <form action="/candidate/show">
+            <a href="">Plan</a>
+        </form>
+        <form action="/candidate/edit">
+            <button type="submit">Edit</button>
+        </form>
+        <form action="/candidate/delite">
+            <button type="submit">Delite</button>
+        </form>
+    </fieldset>
+    <fieldset style="display: flex;align-items: center; gap: 15px;">
+        <h1>dashboard candidates</h1>
+        <form action="/candidate/create">
+            <button type="submit">Create Plan</button>
+        </form>
+    </fieldset>
 </body>
 </html>
