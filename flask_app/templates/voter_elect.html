@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    <form action="/back" method="post">
+        <button type="submit">back</button>
+    </form>
+
+    <h1>Vote</h1>
+
+    <div class="preference">
+        <label for="candidate1">Candidate 1</label>
+        <input type="radio" name="candidate" id="candidate1" />
+    </div>
+    <div class="preference">
+        <label for="candidate2">Candidate 2</label>
+        <input type="radio" name="candidate" id="candidate2" />
+    </div>
+    <div class="form-group">
+        <button id="validateBtn">Validate</button>
+    </div>
+
+    <script>
+        document.getElementById('validateBtn').addEventListener('click', function () {
+            // Disable radio buttons
+            document.getElementById('candidate1').disabled = true;
+            document.getElementById('candidate2').disabled = true;
+
+            // Change button text to "Validated"
+            this.textContent = 'Validated';
+        });
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
