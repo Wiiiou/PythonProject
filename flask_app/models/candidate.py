@@ -15,6 +15,7 @@ class Candidate:
         self.region=data['region']
         self.birthdate=data['birthdate']
         self.password=data['password']
+        # self.candidate_id=data['candidate_id']
     @classmethod
     def create(cls,data):
         query="""INSERT INTO condidates
@@ -22,13 +23,14 @@ class Candidate:
                 (%(first_name)s,%(last_name)s,%(email)s,%(password)s
                 ,%(birthdate)s,%(region)s,%(bio)s);"""
         return connectToMySQL(database).query_db(query,data)
+    
     @classmethod
     def get_all(cls):
         query="""SELECT * FROM condidates;"""
         db_result=connectToMySQL(database).query_db(query)
         all_voters=[]
         for row in db_result:
-            all_voters.append(cls(row))
+            all_voters.append(row)
         return all_voters
     @classmethod
     def get_voter_by_email(cls,data):
@@ -37,7 +39,14 @@ class Candidate:
         if db_result:
             return cls(db_result[0])
         return None
-    
+    @classmethod
+    def get_candidate_by_id(cls,data):
+        query="""SELECT * FROM condidates WHERE id=%(id)s;"""
+        db_result=connectToMySQL(database).query_db(query,data)
+        print(db_result, data)
+        if db_result:
+            return cls(db_result[0])
+        return None
     @staticmethod
     def validate(data):
         is_valid=True
@@ -70,4 +79,11 @@ class Candidate:
         if len(data['bio'])<10:
             flash('the bio must be at least 10 string long')
             is_valid=False
+        for i in range(len(Candidate.get_all())):
+            print(Candidate.get_all()[i])
+            print(Candidate.get_all()[i]['email'])
+            if data['email']==Candidate.get_all()[i]['email']:
+                is_valid=False
+                flash('email already exist so pls try another one ')
+                break
         return is_valid

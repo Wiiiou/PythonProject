@@ -69,18 +69,9 @@
                 <option value="Wyoming">Wyoming</option>
             </select>
             <label for="">Role</label>
-            <select name="role" >
-                <option value="candidate">Candidate</option>
-                <option value="voter">Voter</option>
-            </select>
             <label for="Birt">Birthdate</label>
             <input type="date" name="birthdate">
             <input type="password" name="password" placeholder="Password">
-            {%if session['role']=="candidate"%}
-                <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
-            {%elif session['role']=="voter"%}
-                <p></p>
-            {%endif%}
             <button type="submit">Register</button>
         </form>
         <form action="/back" method="post">

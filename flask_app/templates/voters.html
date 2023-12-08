@@ -31,8 +31,12 @@
                     <td>Yes</td>
                 {% endif %}
                 <td>
-                    <form action="/ban">
-                        <button>Ban</button>
+                    <form action="/banned/{{voter.id}}" method="post">
+                        {%if voter.is_banned==1%}
+                            <button >Is_Baned</button>
+                        {%else%}
+                            <button type="submit">ban</button>
+                        {%endif%}
                     </form>
                 </td>
             </tr>

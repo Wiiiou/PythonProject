@@ -9,6 +9,7 @@
     <h1>Candidates</h1>
     {%for candidate in candidates%}
         <div class="candidats">
+            <textarea name="bio"  cols="30" rows="10">{{candidate.bio}}</textarea>
             <img src="{{candidate.img}}" alt="candidate">
             <a href="/show/{{candidate.id}}">show bio and info</a>
         </div>

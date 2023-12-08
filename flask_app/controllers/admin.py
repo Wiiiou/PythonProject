@@ -3,9 +3,28 @@ from flask import render_template,redirect,session,flash,request
 from flask_app.models.admin import Admin
 from flask_app.models.voter import Voter
 from flask_app.models.candidate import Candidate
-# from pandas import pd
+import pandas as pd
 from flask_bcrypt import Bcrypt
+import plotly.express as px
+import plotly.offline as pyo
 
+# Create a dictionary with data
+data = {
+    'Name': [],
+    'Percentage': [],  # Numeric values without '%' symbol
+    'City': []
+}
+
+# Convert the dictionary into a DataFrame
+
+df = pd.DataFrame(data)
+print(df)
+# fig = px.bar(df, x='Name', y='Percentage', hover_data=['City'], barmode='stack')
+# fig.update_traces(texttemplate='%{y}%', textposition='outside')  # Add percentage to bars
+# fig.update_layout(yaxis_tickformat='%') # Show y-axis in percentage format
+# fig.show()
+# html_file_path = 'plotly_chart.html'
+# pyo.plot(fig, filename=html_file_path, auto_open=False)
 
 #create a bcrypt variable to acces to the Bcrypt class and use the function to hash the password
 bcrypt=Bcrypt(app)
@@ -67,6 +86,10 @@ def admin_dashboard():
 def show_create():
     return render_template('create_voter.html')
 
+
+@app.route('/admin/alphacreated')
+def show_jmal():
+    return render_template('create_candidates.html')
 #this route to make the admin to create the voter
 @app.route('/admin/create/voter',methods=['POST'])
 def create():
@@ -93,7 +116,7 @@ def create_cand():
         cand_id=Candidate.create(data)
         session['cand_id']=cand_id
         return redirect('/candidates')
-    return redirect('/admin/created')
+    return redirect('/admin/alphacreated')
 
 @app.route('/candidates')
 def show_candidates():
@@ -124,7 +147,15 @@ def login_voter():
 def create_candidate():
     return render_template('create_candidates.html',session=session)
 
-#
+@app.route('/show/candidate/<int:id>')
+def show_the_candidate_info(id):
+    candidates=Candidate.get_candidate_by_id({"id":id})
+    print(candidates)
+    if candidates:
+        return render_template('Candidate.html',candidates=candidates)
+    return redirect('/voter/dashboard')
+
+#this route will show the the dashboard of the voters
 @app.route('/voter/dashboard')
 def show_candidat_voters():
     return render_template('dashboard_voters.html')
@@ -134,6 +165,14 @@ def show_candidat_voters():
 def back():
     session.clear()
     return redirect('/login/dashboard')
+
+#his for banning 
+@app.route('/banned/<int:id>', methods=['POST'])
+def banned_users(id):
+    data={'x':1,'id':id}
+    Voter.update(data)
+    return redirect('/admin/dashboard/voters')
+
 
 @app.route('/logout',methods=['POST'])
 def logout():

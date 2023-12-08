@@ -5,9 +5,6 @@ from flask_app import app
 
 import re
 email_regex=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
-
-
 class Voter:
     def __init__(self ,data):
         self.id=data['id']
@@ -32,7 +29,7 @@ class Voter:
         db_result=connectToMySQL(database).query_db(query)
         all_voters=[]
         for row in db_result:
-            all_voters.append(cls(row))
+            all_voters.append(row)
         return all_voters
     @classmethod
     def get_voter_by_email(cls,data):
@@ -41,6 +38,12 @@ class Voter:
         if db_result:
             return cls(db_result[0])
         return None
+    @staticmethod
+    def update(data):
+        query="""
+            UPDATE voters SET is_banned=%(x)s WHERE id=%(id)s;
+            """ 
+        return connectToMySQL(database).query_db(query,data)
     @staticmethod
     def validate(data):
         is_valid=True
@@ -70,6 +73,14 @@ class Voter:
             if countM==0 or countm==0:
                 is_valid=False
                 flash('Must contain at least one Upper Case and one Camel Case and one number')
+        for i in range(len(Voter.get_all())):
+            print(Voter.get_all()[i])
+            print(Voter.get_all()[i]['cin'])
+            print(data['cin'])
+            if data['cin'] == Voter.get_all()[i]['cin']:
+                is_valid=False
+                flash('this Id already Exit')
+                print(is_valid)
+                break
         return is_valid
-    # @staticmethod
-    # def
+    
