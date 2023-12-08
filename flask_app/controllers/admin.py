@@ -140,8 +140,14 @@ def login_voter():
     if not bcrypt.check_password_hash(voter_from_db.password,request.form['password']):
         flash('the Password Is Invalid please Try again',"login")
         return redirect('/login/voter')
+    if voter_from_db.is_banned==1:
+        return redirect('/yourebanned')
     return redirect('/voter/dashboard')
 
+
+@app.route('/yourebanned')
+def bannedpls():
+    return render_template('youre_banned.html')
 #this route to render me the create pages for the candidate
 @app.route('/admin/candidate')
 def create_candidate():

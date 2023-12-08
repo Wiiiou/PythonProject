@@ -16,6 +16,7 @@ class Voter:
         self.vote=data['vote']
         self.birthdate=data['birthdate']
         self.password=data['password']
+        self.is_banned=data['is_banned']
     @classmethod
     def create(cls,data):
         query="""INSERT INTO voters
