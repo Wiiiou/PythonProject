@@ -13,15 +13,15 @@ class Candidate:
         self.email=data['email']
         self.bio=data['bio']#for id number
         self.region=data['region']
-        self.birthdate=data['birthdate']
+        self.age=data['age']
         self.password=data['password']
         # self.candidate_id=data['candidate_id']
     @classmethod
     def create(cls,data):
         query="""INSERT INTO condidates
-        (first_name,last_name,email,password,birthdate,region,bio) VALUES
+        (first_name,last_name,email,password,age,region,bio) VALUES
                 (%(first_name)s,%(last_name)s,%(email)s,%(password)s
-                ,%(birthdate)s,%(region)s,%(bio)s);"""
+                ,%(age)s,%(region)s,%(bio)s);"""
         return connectToMySQL(database).query_db(query,data)
     
     @classmethod
@@ -62,7 +62,7 @@ class Candidate:
         if data['region']=="Select your region":
             is_valid=False
             flash('please select your region')
-        if data['birthdate']=="":
+        if data['age']=="":
             is_valid=False
             flash('please insert your birthday')
         if len(data['password'])<8:
