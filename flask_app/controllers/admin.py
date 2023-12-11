@@ -5,6 +5,7 @@ from flask_app.models.voter import Voter
 from flask_app.models.candidate import Candidate
 # import pandas as pd
 from flask_bcrypt import Bcrypt
+from flask import jsonify
 # import plotly.express as px
 # import plotly.offline as pyo
 
@@ -185,3 +186,21 @@ def logout():
     session.clear()
     return redirect('/')
 
+
+@app.route('/vote',methods=['POST'])
+def voter():
+    data={
+        **request.form
+    }
+    res=Voter.vote(data)
+    return res
+    
+@app.route('/show/candidate/votes/<int:id>')
+def show_the_candidate_votes(id):
+    vote_count = Candidate.get_candidate_votes({"id": id})
+    
+
+    if vote_count is not None:
+        return jsonify({'candidate_id': id, 'vote_count': vote_count})
+    else:
+        return jsonify({'message': 'No votes found for the candidate ','candidat':id}), 404

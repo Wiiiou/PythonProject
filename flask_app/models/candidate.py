@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import database
 from flask import flash
+from flask import jsonify
 
 import re
 email_regex=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -47,6 +48,17 @@ class Candidate:
         if db_result:
             return cls(db_result[0])
         return None
+    
+    @classmethod
+    def get_candidate_votes(cls, data):
+        print(data)
+        query = "SELECT COUNT(*) AS vote_count FROM votes WHERE condidate_id =%(id)s;"
+        db_result = connectToMySQL(database).query_db(query, data)
+        print(db_result)
+        if db_result and 'vote_count' in db_result[0]:
+            return db_result[0]['vote_count']
+        return None
+    
     @staticmethod
     def validate(data):
         is_valid=True
