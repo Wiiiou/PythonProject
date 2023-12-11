@@ -1,0 +1,1 @@
+SELECT * FROM python_project_db.condidates;

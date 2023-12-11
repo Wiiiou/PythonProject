@@ -1,0 +1,11 @@
+Candidate 1 :
+Email : samantha.w@gmail.com
+Password : candidateApass123
+
+
+
+
+Candidate 2 :
+Email : mike.rodriguez@hotmail.com
+Password :  candidateBpass456
+

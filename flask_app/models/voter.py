@@ -14,16 +14,25 @@ class Voter:
         self.cin=data['cin']#for id number
         self.region=data['region']
         self.vote=data['vote']
-        self.birthdate=data['birthdate']
+        self.age=data['age']
         self.password=data['password']
-        self.is_banned=data['is_banned']
+        self.is_banned = data['is_banned']
     @classmethod
     def create(cls,data):
         query="""INSERT INTO voters
-        (first_name,last_name,email,password,birthdate,region,cin,vote) VALUES
-                (%(first_name)s,%(last_name)s,%(email)s,%(password)s
-                ,%(birthdate)s,%(region)s,%(cin)s,0);"""
+        (first_name,last_name,email,password,age,region,cin,vote,is_banned) VALUES
+                (%(first_name)s,%(last_name)s,%(email)s,%(password)s,%(age)s
+                ,%(region)s,%(cin)s,0,0);"""
         return connectToMySQL(database).query_db(query,data)
+    
+    @classmethod
+    def vote(cls,data):
+        query="""INSERT INTO votes
+        (vote_id,condidate_id) VALUES
+                (%(vote_id)s,%(condidate_id)s);"""
+        return connectToMySQL(database).query_db(query,data)
+        
+
     @classmethod
     def get_all(cls):
         query="""SELECT * FROM voters;"""
@@ -83,5 +92,4 @@ class Voter:
                 flash('this Id already Exit')
                 print(is_valid)
                 break
-        return is_valid
-    
+        return is_valid     

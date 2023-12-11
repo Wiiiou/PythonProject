@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import database
 from flask import flash
+from flask import jsonify
 
 import re
 email_regex=re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -13,15 +14,15 @@ class Candidate:
         self.email=data['email']
         self.bio=data['bio']#for id number
         self.region=data['region']
-        self.birthdate=data['birthdate']
+        self.age=data['age']
         self.password=data['password']
         # self.candidate_id=data['candidate_id']
     @classmethod
     def create(cls,data):
         query="""INSERT INTO condidates
-        (first_name,last_name,email,password,birthdate,region,bio) VALUES
+        (first_name,last_name,email,password,age,region,bio) VALUES
                 (%(first_name)s,%(last_name)s,%(email)s,%(password)s
-                ,%(birthdate)s,%(region)s,%(bio)s);"""
+                ,%(age)s,%(region)s,%(bio)s);"""
         return connectToMySQL(database).query_db(query,data)
     
     @classmethod
@@ -47,6 +48,17 @@ class Candidate:
         if db_result:
             return cls(db_result[0])
         return None
+    
+    @classmethod
+    def get_candidate_votes(cls, data):
+        print(data)
+        query = "SELECT COUNT(*) AS vote_count FROM votes WHERE condidate_id =%(id)s;"
+        db_result = connectToMySQL(database).query_db(query, data)
+        print(db_result)
+        if db_result and 'vote_count' in db_result[0]:
+            return db_result[0]['vote_count']
+        return None
+    
     @staticmethod
     def validate(data):
         is_valid=True
@@ -62,7 +74,7 @@ class Candidate:
         if data['region']=="Select your region":
             is_valid=False
             flash('please select your region')
-        if data['birthdate']=="":
+        if data['age']=="":
             is_valid=False
             flash('please insert your birthday')
         if len(data['password'])<8:

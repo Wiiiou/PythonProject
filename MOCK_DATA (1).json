@@ -1,13 +1,4 @@
-from flask_app import app
-from flask_app.controllers import admin
-from flask_app.models.voter import Voter
-# from flask_app.controllers import users_controller
-# from flask_app.controllers import sasquatch_controller
-
-
-@app.route('/adddata')
-def add_data():
-    data = [{"id":1,"first_name":"Billie","last_name":"Langfield","email":"blangfield0@ehow.com","password":"sC0_Y9vrgd|","region":"Colorado","age":77,"cin":10049982,"vote":True,"is_banned":False,"created_at":"7/21/2023","updated_at":"4/2/2023"},
+[{"id":1,"first_name":"Billie","last_name":"Langfield","email":"blangfield0@ehow.com","password":"sC0_Y9vrgd|","region":"Colorado","age":77,"cin":10049982,"vote":True,"is_banned":False,"created_at":"7/21/2023","updated_at":"4/2/2023"},
 {"id":2,"first_name":"Terry","last_name":"De Vaux","email":"tdevaux1@google.com.hk","password":"qG0_<3p,X+znIYdc","region":"South Carolina","age":27,"cin":45801167,"vote":False,"is_banned":True,"created_at":"6/20/2023","updated_at":"9/11/2023"},
 {"id":3,"first_name":"Sharity","last_name":"Postlethwaite","email":"spostlethwaite2@sphinn.com","password":"nZ2{gwp%l+~d","region":"Illinois","age":35,"cin":50827914,"vote":True,"is_banned":True,"created_at":"7/6/2023","updated_at":"3/9/2023"},
 {"id":4,"first_name":"Pacorro","last_name":"Edy","email":"pedy3@google.es","password":"nT2!Uc~e\\","region":"California","age":30,"cin":27562198,"vote":False,"is_banned":False,"created_at":"5/10/2023","updated_at":"11/30/2023"},
@@ -1007,19 +998,3 @@ def add_data():
 {"id":998,"first_name":"Carlin","last_name":"Handmore","email":"chandmorerp@arizona.edu","password":"mW9{v+e#","region":"California","age":30,"cin":95436893,"vote":False,"is_banned":False,"created_at":"10/1/2023","updated_at":"5/3/2023"},
 {"id":999,"first_name":"Polly","last_name":"Newbery","email":"pnewberyrq@constantcontact.com","password":"oH7{jb~G%&M0{a1","region":"Wisconsin","age":37,"cin":44639229,"vote":False,"is_banned":True,"created_at":"3/10/2023","updated_at":"2/11/2023"},
 {"id":1000,"first_name":"Viki","last_name":"Toman","email":"vtomanrr@webs.com","password":"sO5{#7aX0<@}5ko","region":"Ohio","age":59,"cin":69798304,"vote":True,"is_banned":False,"created_at":"3/4/2023","updated_at":"3/4/2023"}]
-    for one in data:
-        Voter.create(one)
-    return 'data is stored !'
-
-
-# <<<<<<< HEAD
-
-# -------------------------------------------
-if __name__=="__main__":
-    app.run(debug=True,port = 5001)
-# =======
-
-# -------------------------------------------
-if __name__=="__main__":
-    app.run(debug=True,port = 5000)
-# >>>>>>> 3c405feca521acac7982812b67228e6b14a27fc2
