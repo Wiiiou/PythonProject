@@ -1,6 +1,10 @@
 from flask_app import app
 from flask_app.controllers import admin
+<<<<<<< HEAD
+from flask_app.controllers import panda_script
+=======
 from flask_app.models.voter import Voter
+>>>>>>> 3c3bf16395b435605074b89d4d06bb470246df0d
 # from flask_app.controllers import users_controller
 # from flask_app.controllers import sasquatch_controller
 
@@ -1019,7 +1023,3 @@ if __name__=="__main__":
     app.run(debug=True,port = 5001)
 # =======
 
-# -------------------------------------------
-if __name__=="__main__":
-    app.run(debug=True,port = 5000)
-# >>>>>>> 3c405feca521acac7982812b67228e6b14a27fc2

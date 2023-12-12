@@ -16,6 +16,7 @@ class Candidate:
         self.region=data['region']
         self.age=data['age']
         self.password=data['password']
+        self.plan=data['plan']
         # self.candidate_id=data['candidate_id']
     @classmethod
     def create(cls,data):
@@ -44,10 +45,25 @@ class Candidate:
     def get_candidate_by_id(cls,data):
         query="""SELECT * FROM condidates WHERE id=%(id)s;"""
         db_result=connectToMySQL(database).query_db(query,data)
-        print(db_result, data)
         if db_result:
             return cls(db_result[0])
         return None
+<<<<<<< HEAD
+    @classmethod
+    def update(cls,data):
+        print("<😡😡"*10, data,"😡😡"*10)
+        query=""" UPDATE condidates SET first_name=%(first_name)s,last_name=%(last_name)s WHERE id=%(id)s;"""
+        return connectToMySQL(database).query_db(query,data)
+    @classmethod
+    def update_plan(cls,data):
+        print("<😡😡"*10, data,"😡😡"*10)
+        query=""" UPDATE condidates SET plan=%(plan)s WHERE id=%(id)s;"""
+        return connectToMySQL(database).query_db(query,data)
+    @classmethod
+    def update_whole(cls,data):
+        query="""UPDATE condidates SET bio=%(bio)s,plan=%(plan)s WHERE id=%(id)s;"""
+        return connectToMySQL(database).query_db(query,data)
+=======
     
     @classmethod
     def get_candidate_votes(cls, data):
@@ -59,6 +75,7 @@ class Candidate:
             return db_result[0]['vote_count']
         return None
     
+>>>>>>> 3c3bf16395b435605074b89d4d06bb470246df0d
     @staticmethod
     def validate(data):
         is_valid=True
@@ -92,10 +109,9 @@ class Candidate:
             flash('the bio must be at least 10 string long')
             is_valid=False
         for i in range(len(Candidate.get_all())):
-            print(Candidate.get_all()[i])
-            print(Candidate.get_all()[i]['email'])
             if data['email']==Candidate.get_all()[i]['email']:
                 is_valid=False
                 flash('email already exist so pls try another one ')
                 break
         return is_valid
+    

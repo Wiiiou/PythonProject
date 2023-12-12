@@ -49,7 +49,11 @@
                                 {% for message in get_flashed_messages()%}
                                 <li class="h6 text-danger">{{message}}</li>
                                 {%endfor%}
+<<<<<<< HEAD
+                                <input class="form-control" type="text" name="email" placeholder="E-mail Address" required>
+=======
                                 <input class="form-control" type="text" name="username" placeholder="E-mail Address" required>
+>>>>>>> 3c3bf16395b435605074b89d4d06bb470246df0d
                                 <input class="form-control" type="password" name="password" placeholder="Password" required>
                                 <div class="form-button">
                                     <button id="submit" type="submit" class="ibtn">Login</button>
@@ -75,6 +79,10 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<<<<<<< HEAD
+<script type="text/javascript" src="{{ url_for('static', filename='js/maine.js') }}"></script>
+=======
 <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+>>>>>>> 3c3bf16395b435605074b89d4d06bb470246df0d
 </body>
 </html>

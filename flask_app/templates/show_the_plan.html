@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show the candidate informations</title>
+</head>
+<body>
+    <h1>Candidate {{candidate.id}}</h1>
+    <div>
+        <textarea name="bio"  cols="30" rows="10">
+            {{candidate.bio}}
+        </textarea>
+        <textarea name="plan" cols="30" rows="10">
+            {{candidate.plan}}
+        </textarea>
+    </div>
+    <div>
+        <img src="{{img_src.file}}" alt="the candidate img">
+    </div>
+</body>
+</html>

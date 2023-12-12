@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit the Information about you Candidate Number {{session['candidate_id']}}</h1>
+    <div>
+        <form action="/edit/plan/{{candidate.id}}" method="post">
+            <textarea name="bio"  cols="30" rows="10">
+                {{candidate.bio}}
+            </textarea>
+            <textarea name="plan" id="" cols="30" rows="10">
+                {{candidate.plan}}
+            </textarea>
+            <input type="text" name="file" value="{{img_src.file}}">
+            <button type="submit">Edit</button>
+        </form>
+    </div>
+</body>
+</html>
