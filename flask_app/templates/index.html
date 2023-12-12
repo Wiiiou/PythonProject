@@ -1,56 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/iofrm-style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/iofrm-theme4.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-index.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <title>Document</title>
 </head>
-
 <body>
-    <div class="index-body">
-        <div class="website-logo">
-            <a href="index.html">
-                <div class="logo">
-                    <img class="logo-size" src="{{ url_for('static', filename='images/votelogo.png') }}" alt="">
-                </div>
-            </a>
-        </div>
-        <div class="logo2">
-            <img class="logo-size2" src="{{ url_for('static', filename='images/votelogo.png') }}" alt="">
-        </div>
-        <div class="main">
-            <h1 style="color: #D83933;">USA Voting And Elections</h1>
-            <p style="color: #1A4480;">please select your role in this selection</p>
-            <form action="/validate" method="post" onsubmit="return validateForm()" style="margin-left: 10px;">
-                <select name="role" id="role" style="height: 150%; margin-right: 20px;" onchange="toggleButton()">
-                    <option value="select your role" disabled selected>Select your Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="candidate">Candidate</option>
-                    <option value="voter">Voter</option>
-                </select>
-                <button type="submit" class="btn btn-outline" id="submitButton" disabled>Select <i class="bi bi-caret-right-fill"></i></button>
-            </form>
-            
-            <script>
-                function toggleButton() {
-                    var roleSelect = document.getElementById("role");
-                    var submitButton = document.getElementById("submitButton");
-            
-                    if (roleSelect.value === "select your role") {
-                        submitButton.disabled = true;
-                    } else {
-                        submitButton.disabled = false;
-                    }
-                }
-            </script>
-        </div>
+    <img src="" alt="">
+    <h1>USA VOTING AND Elections</h1>
+    <div class="main">
+        <p>please select your role in this selection</p>
+        <form action="/validate" method="post">
+            <select name="role" id="role">
+                <option value="select your role">Select your Role</option>
+                <option value="admin">Admin</option>
+                <option value="candidate">Candidate</option>
+                <option value="voter">Voter</option>
+            </select>
+            <button type="submit">Select</button>
+        </form>
     </div>
 </body>
 </html>
